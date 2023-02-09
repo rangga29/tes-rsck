@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 class PatientFactory extends Factory
 {
     private static $number = 1;
+
     public function definition()
     {
         $faker = Faker::create('id_ID');

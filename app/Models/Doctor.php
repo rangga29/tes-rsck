@@ -19,6 +19,11 @@ class Doctor extends Model
         return $this->hasMany(DoctorSchedule::class, 'doctor_id');
     }
 
+    public function registration_clinics()
+    {
+        return $this->hasMany(RegistrationClinic::class, 'doctor_id');
+    }
+
     public function getRouteKeyName()
     {
         return 'dr_slug';

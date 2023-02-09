@@ -16,6 +16,16 @@ class Patient extends Model
     ];
     protected $dates = ['deleted_at'];
 
+    public function patient_family()
+    {
+        return $this->hasOne(PatientFamily::class, 'patient_id');
+    }
+
+    public function registration_clinics()
+    {
+        return $this->hasMany(RegistrationClinic::class, 'patient_id');
+    }
+
     public function getRouteKeyName()
     {
         return 'pt_norm';

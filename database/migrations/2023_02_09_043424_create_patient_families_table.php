@@ -12,6 +12,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('patient_id')->constrained();
             $table->string('ptf_name');
+            $table->string('ptf_slug')->unique();
             $table->tinyInteger('ptf_relation');
             $table->string('ptf_address');
             $table->string('ptf_kelurahan');
