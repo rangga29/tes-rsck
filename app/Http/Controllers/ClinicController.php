@@ -2,84 +2,73 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreClinicRequest;
+use App\Http\Requests\UpdateClinicRequest;
 use App\Models\Clinic;
-use Illuminate\Http\Request;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class ClinicController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $clinics = Clinic::all();
+        return view('clinics.index', [
+            'title' => 'Data Klinik',
+            'active' => 'clinics',
+            'clinics' => $clinics
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function store(StoreClinicRequest $request)
     {
-        //
+        $validateData = $request->validated();
+        $validateData['cl_slug'] = SlugService::createSlug(Clinic::class, 'cl_slug', $validateData['cl_name']);
+
+        Clinic::create($validateData);
+        return to_route('clinics.index')->withSuccess('Data Klinik Berhasil Ditambahkan');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function edit($slug)
     {
-        //
+        $data = Clinic::where('cl_slug', $slug)->first();
+        return response()->json($data);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Clinic  $clinic
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Clinic $clinic)
+    public function update(UpdateClinicRequest $request, Clinic $clinic)
     {
-        //
+        $validateData = $request->validated();
+        if ($validateData['cl_name'] != $clinic->cl_name) {
+            $validateData['cl_slug'] = SlugService::createSlug(Clinic::class, 'cl_slug', $validateData['cl_name']);
+        }
+
+        $clinic->update($validateData);
+        return to_route('clinics.index')->withSuccess('Data Klinik Berhasil Diubah');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Clinic  $clinic
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Clinic $clinic)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Clinic  $clinic
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Clinic $clinic)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Clinic  $clinic
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Clinic $clinic)
     {
-        //
+        $clinic->delete();
+        return to_route('clinics.index')->withSuccess('Data Klinik Berhasil Dihapus');
+    }
+
+    public function deleted()
+    {
+        return view('clinics.deleted', [
+            'title' => 'Data Klinik Dihapus',
+            'active' => 'clinics',
+            'clinics' => Clinic::onlyTrashed()->orderBy('deleted_at', 'desc')->get()
+        ]);
+    }
+
+    public function restore($slug)
+    {
+        Clinic::onlyTrashed()->where('cl_slug', $slug)->restore();
+        return to_route('clinics.index')->withSuccess('Data Klinik Berhasil Dikembalikan');
+    }
+
+    public function permanentDelete($slug)
+    {
+        Clinic::onlyTrashed()->where('cl_slug', $slug)->forceDelete();
+        return to_route('clinics.index')->withSuccess('Data Klinik Berhasil Dihapus Permanen');
     }
 }
