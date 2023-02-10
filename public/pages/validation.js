@@ -29,3 +29,19 @@ $('#editClinics').on('show.bs.modal', function(event) {
         }
     });
 })
+
+$('#editDoctors').on('show.bs.modal', function(event) {
+    var button = $(event.relatedTarget)
+    var slug = button.data('id')
+
+    $.ajax({
+        url: '/doctors/edit/' + slug,
+        type: 'GET',
+        success: function(data) {
+            var modal = $('#editDoctors')
+            modal.find('form').attr('action', '/doctors/' + data.dr_slug)
+            modal.find('#dr_name').val(data.dr_name)
+            modal.find('#dr_phone').val(data.dr_phone)
+        }
+    });
+})

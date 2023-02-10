@@ -14,6 +14,7 @@ class ClinicController extends Controller
         $clinics = Clinic::all();
         return view('clinics.index', [
             'title' => 'Data Klinik',
+            'print' => 'no',
             'active' => 'clinics',
             'clinics' => $clinics
         ]);
@@ -55,6 +56,7 @@ class ClinicController extends Controller
     {
         return view('clinics.deleted', [
             'title' => 'Data Klinik Dihapus',
+            'print' => 'no',
             'active' => 'clinics',
             'clinics' => Clinic::onlyTrashed()->orderBy('deleted_at', 'desc')->get()
         ]);

@@ -30,7 +30,7 @@
             <x-navbar :active="$active" />
             <div class="page-content">
                 <div class="container-fluid">
-                    <x-title :title="$title" />
+                    <x-title :title="$title" :active="$active" :print="$print" />
                     {{ $slot }}
                 </div>
             </div>

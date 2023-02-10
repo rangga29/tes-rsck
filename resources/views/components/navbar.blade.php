@@ -40,11 +40,11 @@
                             <i class="mdi mdi-poll"></i>Data Master <div class="arrow-down"></div>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="topnav-charts">
-                            <a href="charts-morris.html"
+                            <a href="{{ route('clinics.index') }}"
                                 class="dropdown-item {{ $active == 'clinics' ? 'active' : '' }}">
                                 Data Klinik
                             </a>
-                            <a href="charts-google.html"
+                            <a href="{{ route('doctors.index') }}"
                                 class="dropdown-item {{ $active == 'doctors' ? 'active' : '' }}">
                                 Data Dokter
                             </a>

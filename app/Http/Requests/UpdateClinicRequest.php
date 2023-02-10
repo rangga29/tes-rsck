@@ -20,7 +20,7 @@ class UpdateClinicRequest extends FormRequest
     {
         return [
             'cl_name.required' => 'Nama Klinik Harus Diisi',
-            'cl_name.unique' => 'Nama Klinik Sudah Digunakan'
+            'cl_name.unique' => 'Nama Klinik Sudah Ada'
         ];
     }
 }

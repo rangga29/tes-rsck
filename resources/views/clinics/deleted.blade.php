@@ -1,4 +1,4 @@
-<x-main :title="$title" :active="$active">
+<x-main :title="$title" :active="$active" :print="$print">
     <x-slot:css>
         <link rel="stylesheet" type="text/css" href="{{ asset('plugins/datatables/dataTables.bootstrap4.css') }}" />
         <link rel="stylesheet" type="text/css" href="{{ asset('plugins/datatables/responsive.bootstrap4.css') }}" />
@@ -40,7 +40,6 @@
                                                 <i class="feather-trash-2"></i>
                                             </a>
                                         </div>
-                                    </td>
                                     </td>
                                 </tr>
                             @endforeach

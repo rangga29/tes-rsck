@@ -5,16 +5,18 @@
 
             <div class="btn-group" role="group">
                 <button type="button" class="btn btn-primary waves-effect" title="Tambah Data" data-toggle="modal"
-                    data-target="#addClinics">
+                    data-target="#addData">
                     <i class="fas fa-plus"></i>
                 </button>
-                <a href="#" role="button" class="btn btn-danger waves-effect" title="Laporan PDF">
-                    <i class="fas fa-file-pdf"></i>
-                </a>
-                <a href="#" role="button" class="btn btn-success waves-effect" title="Laporan Excel">
-                    <i class="fas fa-file-excel"></i>
-                </a>
-                <a href="{{ route('clinics.deleted') }}" role="button" class="btn btn-secondary waves-effect"
+                @if($print == 'yes')
+                    <a href="#" role="button" class="btn btn-danger waves-effect" title="Laporan PDF">
+                        <i class="fas fa-file-pdf"></i>
+                    </a>
+                    <a href="#" role="button" class="btn btn-success waves-effect" title="Laporan Excel">
+                        <i class="fas fa-file-excel"></i>
+                    </a>
+                @endif
+                <a href="{{ route($active . '.deleted') }}" role="button" class="btn btn-secondary waves-effect"
                     title="Data Dihapus">
                     <i class="fas fa-archive"></i>
                 </a>

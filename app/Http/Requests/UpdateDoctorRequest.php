@@ -3,28 +3,30 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateDoctorRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, mixed>
-     */
     public function rules()
     {
         return [
-            //
+            'dr_name' => ['required', Rule::unique('doctors', 'dr_name')->ignore($this->doctor)],
+            'dr_slug' => ['nullable'],
+            'dr_phone' => ['nullable', 'numeric']
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'dr_name.required' => 'Nama Dokter Harus Diisi',
+            'dr_name.unique' => 'Nama Dokter Sudah Ada',
+            'dr_phone.numeric' => 'No Telepon Harus Berupa Angka'
         ];
     }
 }
