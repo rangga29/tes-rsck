@@ -6,25 +6,29 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreDoctorScheduleRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, mixed>
-     */
     public function rules()
     {
         return [
-            //
+            'clinic_id' => ['required'],
+            'doctor_id' => ['required'],
+            'dcs_day' => ['required'],
+            'dcs_start' => ['required'],
+            'dcs_end' => ['required'],
+            'dcs_is_active' => ['nullable']
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'dcs_day.required' => 'Jadwal Hari Harus Diisi',
+            'dcs_start.required' => 'Waktu Mulai Harus Diisi',
+            'dcs_end.required' => 'Waktu Selsai Harus Diisi'
         ];
     }
 }

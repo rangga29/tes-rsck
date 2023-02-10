@@ -2,83 +2,56 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Clinic;
+use App\Models\Doctor;
 use App\Models\DoctorSchedule;
 use App\Http\Requests\StoreDoctorScheduleRequest;
 use App\Http\Requests\UpdateDoctorScheduleRequest;
 
 class DoctorScheduleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $doctorSchedules = DoctorSchedule::orderBy('dcs_day')->orderBy('dcs_start')->get();
+        $doctors = Doctor::orderBy('dr_name')->get();
+        $clinics = Clinic::orderBy('cl_name')->get();
+        return view('doctor-schedules.index', [
+            'title' => 'Data Jadwal Dokter',
+            'print' => 'no',
+            'active' => 'schedules',
+            'doctors' => $doctors,
+            'clinics' => $clinics,
+            'schedules' => $doctorSchedules
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreDoctorScheduleRequest  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreDoctorScheduleRequest $request)
     {
-        //
+        $validateData = $request->validated();
+        $schedules = DoctorSchedule::all();
+        foreach($schedules as $schedule) {
+            if($schedule->doctor_id == $validateData['doctor_id'] && $schedule->clinic_id == $validateData['clinic_id']) {
+                if($schedule->dcs_day == $validateData['dcs_day']) {
+                }
+            }
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\DoctorSchedule  $doctorSchedule
-     * @return \Illuminate\Http\Response
-     */
     public function show(DoctorSchedule $doctorSchedule)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\DoctorSchedule  $doctorSchedule
-     * @return \Illuminate\Http\Response
-     */
     public function edit(DoctorSchedule $doctorSchedule)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateDoctorScheduleRequest  $request
-     * @param  \App\Models\DoctorSchedule  $doctorSchedule
-     * @return \Illuminate\Http\Response
-     */
     public function update(UpdateDoctorScheduleRequest $request, DoctorSchedule $doctorSchedule)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\DoctorSchedule  $doctorSchedule
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(DoctorSchedule $doctorSchedule)
     {
         //
