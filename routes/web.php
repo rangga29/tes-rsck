@@ -40,6 +40,7 @@ Route::get('/patients/report/excel', [PatientController::class, 'reportExcel'])-
 Route::post('/patients/report/excel/{type}', [PatientController::class, 'printExcel'])->name('patients.report.excel.print');
 Route::resource('/patients', PatientController::class);
 
+Route::get('/polyclinics/checkData', [RegistrationClinicController::class, 'checkData'])->name('polyclinics.checkData');
 Route::post('/polyclinics/search', [RegistrationClinicController::class, 'search'])->name('polyclinics.search');
 Route::get('/polyclinics/deleted', [RegistrationClinicController::class, 'deleted'])->name('polyclinics.deleted');
 Route::get('/polyclinics/restore/{code}', [RegistrationClinicController::class, 'restore'])->name('polyclinics.restore');

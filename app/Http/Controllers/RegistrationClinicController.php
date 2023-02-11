@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Patient;
 use App\Models\RegistrationClinic;
 use App\Http\Requests\StoreRegistrationClinicRequest;
 use App\Http\Requests\UpdateRegistrationClinicRequest;
 use App\Models\Clinic;
 use App\Models\Doctor;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class RegistrationClinicController extends Controller
 {
@@ -55,5 +58,17 @@ class RegistrationClinicController extends Controller
     public function destroy(RegistrationClinic $registrationClinic)
     {
         //
+    }
+
+    public function checkData(Request $request)
+    {
+        $patient = Patient::where('pt_norm', $request->norm)->first();
+        return response()->json([
+            'pat_name' => $patient->pt_name,
+            'pat_address' => $patient->pt_address,
+            'pat_age' => Carbon::now()->diffInYears($patient->pt_dateofbirth),
+            'pat_phone' => $patient->pt_phone,
+            'pat_family' => $patient->patient_family->ptf_name
+        ]);
     }
 }
