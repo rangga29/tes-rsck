@@ -16,7 +16,7 @@
                         </a>
                     </li>
                     <li class="nav-item {{ $active == 'reg_clinic' ? 'active' : '' }}">
-                        <a class="nav-link" href="index.html">
+                        <a class="nav-link" href="{{ route('polyclinics.create') }}">
                             <i class="mdi mdi-home-analytics"></i>
                             Registrasi Poliklinik
                         </a>
@@ -28,7 +28,7 @@
                         </a>
                     </li>
                     <li class="nav-item {{ $active == 'polyclinics' ? 'active' : '' }}">
-                        <a class="nav-link" href="index.html">
+                        <a class="nav-link" href="{{ route('polyclinics.index') }}">
                             <i class="mdi mdi-home-analytics"></i>
                             Data Poliklinik
                         </a>

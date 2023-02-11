@@ -9,7 +9,7 @@
                             data-target="#addData">
                             <i class="fas fa-plus"></i>
                         </button>
-                    @else
+                    @else()
                         <a role="button" class="btn btn-primary waves-effect" href="{{ route($active . '.create') }}"
                             title="Tambah Data">
                             <i class="fas fa-plus"></i>

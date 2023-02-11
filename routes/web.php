@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\DoctorScheduleController;
 use App\Http\Controllers\PatientController;
+use App\Http\Controllers\RegistrationClinicController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
@@ -38,3 +39,13 @@ Route::post('/patients/report/pdf/{type}', [PatientController::class, 'printPdf'
 Route::get('/patients/report/excel', [PatientController::class, 'reportExcel'])->name('patients.report.excel');
 Route::post('/patients/report/excel/{type}', [PatientController::class, 'printExcel'])->name('patients.report.excel.print');
 Route::resource('/patients', PatientController::class);
+
+Route::post('/polyclinics/search', [RegistrationClinicController::class, 'search'])->name('polyclinics.search');
+Route::get('/polyclinics/deleted', [RegistrationClinicController::class, 'deleted'])->name('polyclinics.deleted');
+Route::get('/polyclinics/restore/{code}', [RegistrationClinicController::class, 'restore'])->name('polyclinics.restore');
+Route::get('/polyclinics/permanent-delete/{code}', [RegistrationClinicController::class, 'permanentDelete'])->name('polyclinics.permanent-delete');
+Route::get('/polyclinics/report/pdf', [RegistrationClinicController::class, 'reportPdf'])->name('polyclinics.report.pdf');
+Route::post('/polyclinics/report/pdf/{type}', [RegistrationClinicController::class, 'printPdf'])->name('polyclinics.report.pdf.print');
+Route::get('/polyclinics/report/excel', [RegistrationClinicController::class, 'reportExcel'])->name('polyclinics.report.excel');
+Route::post('/polyclinics/report/excel/{type}', [RegistrationClinicController::class, 'printExcel'])->name('polyclinics.report.excel.print');
+Route::resource('/polyclinics', RegistrationClinicController::class);
