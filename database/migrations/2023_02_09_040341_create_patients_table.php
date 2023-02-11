@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('pt_kecamatan');
             $table->string('pt_city');
             $table->string('pt_hometown');
-            $table->string('pt_dateofbirth');
+            $table->date('pt_dateofbirth');
             $table->tinyInteger('pt_religion');
             $table->tinyInteger('pt_blood_type');
             $table->string('pt_phone');

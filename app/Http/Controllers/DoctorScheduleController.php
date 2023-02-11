@@ -27,14 +27,14 @@ class DoctorScheduleController extends Controller
 
     public function store(StoreDoctorScheduleRequest $request)
     {
-        $validateData = $request->validated();
-        $schedules = DoctorSchedule::all();
-        foreach($schedules as $schedule) {
-            if($schedule->doctor_id == $validateData['doctor_id'] && $schedule->clinic_id == $validateData['clinic_id']) {
-                if($schedule->dcs_day == $validateData['dcs_day']) {
-                }
-            }
-        }
+        // $validateData = $request->validated();
+        // $schedules = DoctorSchedule::all();
+        // foreach($schedules as $schedule) {
+        //     if($schedule->doctor_id == $validateData['doctor_id'] && $schedule->clinic_id == $validateData['clinic_id']) {
+        //         if($schedule->dcs_day == $validateData['dcs_day']) {
+        //         }
+        //     }
+        // }
     }
 
     public function show(DoctorSchedule $doctorSchedule)

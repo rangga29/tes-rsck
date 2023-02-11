@@ -8,6 +8,7 @@ class DashboardController extends Controller
     {
         return view('dashboard', [
             'title' => 'Dashboard',
+            'print' => 'no',
             'active' => 'dashboard'
         ]);
     }

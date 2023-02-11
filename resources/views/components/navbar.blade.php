@@ -4,13 +4,13 @@
             <div class="collapse navbar-collapse" id="topnav-menu-content">
                 <ul class="navbar-nav">
                     <li class="nav-item {{ $active == 'dashboard' ? 'active' : '' }}">
-                        <a class="nav-link" href="index.html">
+                        <a class="nav-link" href="{{ route('dashboard') }}">
                             <i class="mdi mdi-home-analytics"></i>
                             Dashboard
                         </a>
                     </li>
                     <li class="nav-item {{ $active == 'reg_patient' ? 'active' : '' }}">
-                        <a class="nav-link" href="index.html">
+                        <a class="nav-link" href="{{ route('patients.create') }}">
                             <i class="mdi mdi-home-analytics"></i>
                             Registrasi Pasien
                         </a>
@@ -22,7 +22,7 @@
                         </a>
                     </li>
                     <li class="nav-item {{ $active == 'patients' ? 'active' : '' }}">
-                        <a class="nav-link" href="index.html">
+                        <a class="nav-link" href="{{ route('patients.index') }}">
                             <i class="mdi mdi-home-analytics"></i>
                             Data Pasien
                         </a>
@@ -48,7 +48,7 @@
                                 class="dropdown-item {{ $active == 'doctors' ? 'active' : '' }}">
                                 Data Dokter
                             </a>
-                            <a href="charts-google.html"
+                            <a href="{{ route('schedules.index') }}"
                                 class="dropdown-item {{ $active == 'schedules' ? 'active' : '' }}">
                                 Data Jadwal Dokter
                             </a>
